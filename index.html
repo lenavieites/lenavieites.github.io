@@ -1,1 +1,276 @@
-Oi!
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vivia Lilás — Página Única</title>
+  <meta name="description" content="Tema simples inspirado no Vivia (Hexo), em HTML e CSS puros, nas cores lilás." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      /* Paleta lilás */
+      --lilac-50:#faf7ff;
+      --lilac-100:#f3edff;
+      --lilac-200:#e6dbff;
+      --lilac-300:#d2bfff;
+      --lilac-400:#b894ff;
+      --lilac-500:#9c6bff;
+      --lilac-600:#7f4bff;
+      --lilac-700:#6637e6;
+      --lilac-800:#502bb3;
+      --lilac-900:#3f238a;
+
+      --bg:#ffffff;
+      --bg-soft:#faf7ff;
+      --text:#2a2236;
+      --muted:#6a6580;
+      --card:#ffffff;
+      --border:rgba(102,55,230,.15);
+      --shadow: 0 10px 30px rgba(102,55,230,.12);
+      --radius: 18px;
+      --radius-sm: 14px;
+      --container: 1150px;
+    }
+
+    /* Reset leve */
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.6;
+    }
+
+    /* Container padrão */
+    .container{width:min(var(--container), 92vw);margin-inline:auto}
+
+    /* Topbar / Nav */
+    header.topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(120%) blur(10px);
+      background:linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.6));
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
+    .logo{
+      width:38px;height:38px; border-radius:12px;
+      background:linear-gradient(135deg,var(--lilac-500),var(--lilac-300));
+      box-shadow:var(--shadow);
+    }
+    .brand-title{font-weight:700; letter-spacing:.3px; color:var(--text)}
+    nav.menu{display:flex; gap:18px}
+    nav.menu a{
+      color:var(--muted); text-decoration:none; font-weight:500; font-size:.95rem;
+      padding:8px 12px; border-radius:12px; transition:all .2s ease;
+    }
+    nav.menu a:hover{background:var(--lilac-100); color:var(--lilac-800)}
+
+    /* Hero / Banner */
+    .hero{
+      position:relative; overflow:hidden;
+      background: radial-gradient(1200px 600px at 10% -20%, var(--lilac-300) 0%, transparent 60%),
+                  radial-gradient(900px 600px at 110% 10%, var(--lilac-200) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-soft), #fff 70%);
+      border-bottom:1px solid var(--border);
+    }
+    .hero-inner{display:grid; grid-template-columns: 1.15fr .85fr; gap:40px; align-items:center; padding:64px 0 72px}
+    .hero h1{
+      font-family:"Playfair Display", serif; font-weight:700; line-height:1.1;
+      font-size: clamp(2.1rem, 4vw + 1rem, 3.6rem);
+      margin:0 0 12px; color:var(--lilac-900);
+      letter-spacing:.2px;
+    }
+    .hero p{font-size:1.05rem; color:var(--muted); margin:0 0 22px}
+    .cta{
+      display:flex; gap:12px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+      padding:12px 16px; border-radius:14px; font-weight:600; border:1px solid transparent;
+      box-shadow:var(--shadow);
+    }
+    .btn.primary{background:linear-gradient(135deg,var(--lilac-600),var(--lilac-500)); color:#fff}
+    .btn.ghost{background:#fff; color:var(--lilac-800); border-color:var(--border)}
+
+    .hero-card{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:22px; box-shadow:var(--shadow);
+    }
+    .pill{
+      display:inline-block; font-size:.78rem; font-weight:600; letter-spacing:.3px;
+      background:linear-gradient(135deg,var(--lilac-100),var(--lilac-50));
+      color:var(--lilac-800); padding:6px 10px; border-radius:999px; border:1px solid var(--border);
+    }
+
+    /* Layout principal: posts + sidebar */
+    .main{padding:42px 0}
+    .grid{
+      display:grid; grid-template-columns: 1.6fr .9fr; gap:28px;
+    }
+
+    /* Cards de post */
+    .posts{display:grid; grid-template-columns: repeat(12, 1fr); gap:22px}
+    .post{
+      grid-column: span 12;
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      overflow:hidden; box-shadow:var(--shadow); display:grid; grid-template-columns: 1.1fr 1.9fr;
+    }
+    .post .cover{min-height:180px; background:linear-gradient(135deg,var(--lilac-400),var(--lilac-200))}
+    .post .content{padding:18px 18px 20px}
+    .meta{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:10px}
+    .tag{font-size:.78rem; padding:6px 10px; border-radius:999px; background:var(--lilac-100); color:var(--lilac-800); border:1px solid var(--border)}
+    .date{font-size:.85rem; color:var(--muted)}
+    .post h3{margin:6px 0 8px; font-size:1.2rem}
+    .post p{margin:0 0 12px; color:var(--muted)}
+    .post .readmore{display:inline-block; font-weight:600; color:var(--lilac-800); text-decoration:none}
+
+    /* Sidebar widgets */
+    .sidebar{display:grid; gap:18px}
+    .widget{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius-sm);
+      padding:18px; box-shadow:var(--shadow);
+    }
+    .widget h4{margin:0 0 12px; font-size:1.05rem}
+    .list{display:grid; gap:10px; padding:0; margin:0; list-style:none}
+    .list a{color:var(--lilac-800); text-decoration:none}
+
+    /* Rodapé */
+    footer{
+      border-top:1px solid var(--border); background:linear-gradient(180deg,#fff,var(--bg-soft));
+      padding:30px 0; color:var(--muted)
+    }
+    .foot{display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+    .foot small{opacity:.9}
+
+    /* Responsivo */
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns: 1fr; padding:48px 0 56px}
+      .grid{grid-template-columns: 1fr}
+      .post{grid-template-columns: 1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container nav" role="navigation" aria-label="Principal">
+      <a class="brand" href="#home">
+        <span class="logo" aria-hidden="true"></span>
+        <span class="brand-title">Vivia Lilás</span>
+      </a>
+      <nav class="menu">
+        <a href="#home">Início</a>
+        <a href="#posts">Posts</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero / Banner -->
+  <section id="home" class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="pill">Tema inspirado no Vivia</span>
+        <h1>Design lilás elegante, minimal e rápido.</h1>
+        <p>Uma página única em HTML + CSS puros, com foco em tipografia, cartões e pequenos toques de brilho lilás — um aceno ao tema Vivia do Hexo.</p>
+        <div class="cta">
+          <a class="btn primary" href="#posts">Ver posts</a>
+          <a class="btn ghost" href="#sobre">Saiba mais</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Destaques">
+        <h3 style="margin:6px 0 10px">Destaques</h3>
+        <ul class="list">
+          <li>🎯 Layout responsivo e limpo</li>
+          <li>✨ Cartões com sombras suaves</li>
+          <li>🎨 Paleta lilás personalizável em <code>:root</code></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- Conteúdo principal -->
+  <main class="main">
+    <div class="container grid">
+      <!-- Coluna de posts -->
+      <section id="posts" class="posts" aria-label="Lista de posts">
+        <!-- Post 1 -->
+        <article class="post">
+          <div class="cover" role="img" aria-label="Capa lilás"></div>
+          <div class="content">
+            <div class="meta">
+              <span class="tag">Design</span>
+              <time class="date" datetime="2025-08-15">15 ago 2025</time>
+            </div>
+            <h3>Como adaptar o estilo do Vivia em CSS puro</h3>
+            <p>Notas de tipografia, espaçamento e sombras para um visual elegante, sem dependências.</p>
+            <a class="readmore" href="#">Ler mais →</a>
+          </div>
+        </article>
+        <!-- Post 2 -->
+        <article class="post">
+          <div class="cover" role="img" aria-label="Capa em gradiente lilás"></div>
+          <div class="content">
+            <div class="meta">
+              <span class="tag">Acessibilidade</span>
+              <time class="date" datetime="2025-08-10">10 ago 2025</time>
+            </div>
+            <h3>Checklist rápido de acessibilidade</h3>
+            <p>Contraste, navegação por teclado e rótulos ARIA que importam em sites simples.</p>
+            <a class="readmore" href="#">Ler mais →</a>
+          </div>
+        </article>
+        <!-- Post 3 -->
+        <article class="post">
+          <div class="cover" role="img" aria-label="Capa abstrata lilás"></div>
+          <div class="content">
+            <div class="meta">
+              <span class="tag">Performance</span>
+              <time class="date" datetime="2025-08-01">01 ago 2025</time>
+            </div>
+            <h3>Otimizando fontes e imagens</h3>
+            <p>Como carregar fontes do Google com preconnect e usar placeholders leves.</p>
+            <a class="readmore" href="#">Ler mais →</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- Sidebar -->
+      <aside class="sidebar" aria-label="Barra lateral">
+        <section id="sobre" class="widget">
+          <h4>Sobre</h4>
+          <p>Este tema usa apenas HTML + CSS. Personalize cores em <code>:root</code> e ajuste os <em>cards</em> como preferir.</p>
+        </section>
+        <section class="widget">
+          <h4>Categorias</h4>
+          <ul class="list">
+            <li><a href="#">Design</a></li>
+            <li><a href="#">Acessibilidade</a></li>
+            <li><a href="#">Performance</a></li>
+          </ul>
+        </section>
+        <section id="contato" class="widget">
+          <h4>Contato</h4>
+          <p>Mande um alô: <a href="mailto:ola@exemplo.com">ola@exemplo.com</a></p>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer>
+    <div class="container foot">
+      <small>© 2025 — Vivia Lilás (HTML + CSS puros)</small>
+      <small><a href="#home" style="text-decoration:none; color:inherit">Voltar ao topo ↑</a></small>
+    </div>
+  </footer>
+</body>
+</html>
